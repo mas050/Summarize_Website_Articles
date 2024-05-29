@@ -30,6 +30,9 @@ client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 # --- Global State Variables ---
 if "extracted_article" not in st.session_state:
     st.session_state.extracted_article = None
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
 
 # --- Helper Functions ---
 def text_extractor_agent(model_input,website_content,URL_PATH):
@@ -101,6 +104,8 @@ website_link = st.text_input("Paste the article URL:")
 
 if st.button("Process Article"):
     with st.spinner("Processing article..."):
+        st.session_state.messages = []
+        
         if st.session_state.extracted_article is None or website_link != st.session_state.last_url:  # Check if re-extraction is needed
             # Extract article
             website_scrape_tool = ScrapeWebsiteTool(website_url=website_link)
@@ -112,10 +117,33 @@ if st.button("Process Article"):
 
         # Summarize article (always re-summarize based on language)
         response_summary_agent = text_summarizer_agent(model_selected, st.session_state.extracted_article, user_language)
+        st.session_state.messages.append({"role": "assistant", "content": response_summary_agent})
 
     # Display Results
     st.subheader(f"Summarized Article ({user_language}):")
-    st.code(response_summary_agent, language="text")
+    
+    # Display messages (only the current question and answer)
+    if st.session_state.messages:
+        with st.chat_message(st.session_state.messages[-1]["role"]):
+            response_content = st.session_state.messages[-1]["content"]
+            st.markdown(response_content, unsafe_allow_html=True)  # Allow HTML for the span
+            if st.session_state.messages[-1]["role"] == "assistant":
+                html(f"""
+                    <button id="copyButton">Copy to Clipboard</button>
+                    <script>
+                        const copyButton = document.getElementById('copyButton');
+                        const textToCopy = `{response_content}`;  
+                        copyButton.addEventListener('click', () => {{
+                            navigator.clipboard.writeText(textToCopy).then(() => {{
+                                console.log('Text copied to clipboard!');
+                                copyButton.innerText = "Copied!";
+                            }}).catch(err => {{
+                                console.error('Could not copy text: ', err);
+                                copyButton.innerText = "Copy Failed!";
+                            }});
+                        }});
+                    </script>
+                """)
     
     st.subheader("Extracted Article:")
     st.write(st.session_state.extracted_article)
