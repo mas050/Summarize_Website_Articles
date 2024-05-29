@@ -1,13 +1,9 @@
 # streamlit run Streamlit_Website_Article_Summarizer.py
 
 import streamlit as st
-from crewai import Agent, Task, Crew, Process
 from crewai_tools import ScrapeWebsiteTool
-
 from langchain_groq import ChatGroq
-
 from groq import Groq
-
 import os
 
 # Streamlit App Configuration
