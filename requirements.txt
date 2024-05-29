@@ -1,3 +1,4 @@
 crewai_tools
 groq
 chromadb
+langchain_groq
