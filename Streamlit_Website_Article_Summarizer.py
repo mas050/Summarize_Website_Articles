@@ -130,7 +130,8 @@ if st.button("Process Article"):
 
         
         st.subheader(f"Summarized Article ({user_language}):")
-        st.write(st.session_state.messages[-1]["content"])
+        #st.write(st.session_state.messages[-1]["content"])
+        st.markdown(st.session_state.messages[-1]["content"], unsafe_allow_html=True)
     
    # with st.container():  # Wrap the output in a container for better styling
    #     # Display Results
