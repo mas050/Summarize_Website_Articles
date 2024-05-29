@@ -6,7 +6,7 @@ from crewai_tools import ScrapeWebsiteTool
 from langchain_groq import ChatGroq
 from groq import Groq
 import os
-
+from streamlit.components.v1 import html
 
 import pysqlite3
 import sys
