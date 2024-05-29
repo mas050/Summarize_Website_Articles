@@ -114,8 +114,10 @@ if st.button("Process Article"):
         response_summary_agent = text_summarizer_agent(model_selected, st.session_state.extracted_article, user_language)
 
     # Display Results
+    st.subheader(f"Summarized Article ({user_language}):")
+    st.code(response_summary_agent, language="text")
+    
     st.subheader("Extracted Article:")
     st.write(st.session_state.extracted_article)
 
-    st.subheader(f"Summarized Article ({user_language}):")
-    st.code(response_summary_agent, language="text")
+
