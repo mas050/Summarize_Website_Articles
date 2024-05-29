@@ -75,6 +75,7 @@ def text_summarizer_agent(model_input,content_input,output_language):
         -Do not make up facts, stay on the exact content and information provided to you, nothing more. \
         -Do not include your own biais or interpretation of the facts and informations you have to summarize. \
         -Always structure your output in 3 parts that you ouput the names in {output_language}: 1) Abstract, 2) Executive summary and 3) Bullet Points Summary \
+        -Always change the line when you write a new bullet point \
         
         Here's the piece of text you need to summarize: {content_input}
     """
