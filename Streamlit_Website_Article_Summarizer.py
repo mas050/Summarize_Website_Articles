@@ -94,6 +94,16 @@ def text_summarizer_agent(model_input,content_input,output_language):
 st.title("📰 Article Summarizer & Translator")
 st.write("Extract, summarize, and translate news articles with ease!")
 
+# Custom CSS for wider container (optional)
+st.markdown("""
+<style>
+.stMarkdown {
+    max-width: 90%; 
+    margin: 0 auto; 
+}
+</style>
+""", unsafe_allow_html=True)
+
 # Input Area
 model_selected = st.selectbox("Model", ["llama3-8b-8192", "llama3-70b-8192", "mixtral-8x7b-32768"])  
 user_language = st.selectbox("Summary Language", ["English", "French", "Spanish", "German", "Italian", "Portuguese", "Filipino", "Japanese", "Korean",  "Arabic", "Hindi", "Russian"]) 
