@@ -1,10 +1,23 @@
 # streamlit run Streamlit_Website_Article_Summarizer.py
 
 import streamlit as st
+from streamlit import logger
 from crewai_tools import ScrapeWebsiteTool
 from langchain_groq import ChatGroq
 from groq import Groq
 import os
+
+
+_import_('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+
+app_logger = logger.get_logger('SMI_APP')
+app_logger.info(f"version sqlite : {sqlite3.sqlite_version}")
+app_logger.info(f"version sys : {sys.version}")
+
+
 
 # Streamlit App Configuration
 st.set_page_config(page_title="Article Summarizer & Translator", page_icon="📄")
