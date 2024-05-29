@@ -11,7 +11,7 @@ import os
 _import_('pysqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-
+import sqlite3
 
 app_logger = logger.get_logger('SMI_APP')
 app_logger.info(f"version sqlite : {sqlite3.sqlite_version}")
