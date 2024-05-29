@@ -127,32 +127,36 @@ if st.button("Process Article"):
         response_summary_agent = text_summarizer_agent(model_selected, st.session_state.extracted_article, user_language)
         st.session_state.messages.append({"role": "assistant", "content": response_summary_agent})
 
-    with st.container():  # Wrap the output in a container for better styling
-        # Display Results
-        st.subheader(f"Summarized Article ({user_language}):")
         
-        # Display messages (only the current question and answer)
-        if st.session_state.messages:
-            with st.chat_message(st.session_state.messages[-1]["role"]):
-                response_content = st.session_state.messages[-1]["content"]
-                st.markdown(response_content, unsafe_allow_html=True)  # Allow HTML for the span
-                if st.session_state.messages[-1]["role"] == "assistant":
-                    html(f"""
-                        <button id="copyButton">Copy to Clipboard</button>
-                        <script>
-                            const copyButton = document.getElementById('copyButton');
-                            const textToCopy = `{response_content}`;  
-                            copyButton.addEventListener('click', () => {{
-                                navigator.clipboard.writeText(textToCopy).then(() => {{
-                                    console.log('Text copied to clipboard!');
-                                    copyButton.innerText = "Copied!";
-                                }}).catch(err => {{
-                                    console.error('Could not copy text: ', err);
-                                    copyButton.innerText = "Copy Failed!";
-                                }});
-                            }});
-                        </script>
-                    """)
+        st.subheader(f"Summarized Article ({user_language}):")
+        st.write(st.session_state.messages[-1]["content"])
+    
+   # with st.container():  # Wrap the output in a container for better styling
+   #     # Display Results
+   #     st.subheader(f"Summarized Article ({user_language}):")
+   #     
+   #     # Display messages (only the current question and answer)
+   #     if st.session_state.messages:
+   #         with st.chat_message(st.session_state.messages[-1]["role"]):
+   #             response_content = st.session_state.messages[-1]["content"]
+   #             st.markdown(response_content, unsafe_allow_html=True)  # Allow HTML for the span
+   #             if st.session_state.messages[-1]["role"] == "assistant":
+   #                 html(f"""
+   #                     <button id="copyButton">Copy to Clipboard</button>
+   #                     <script>
+   #                         const copyButton = document.getElementById('copyButton');
+   #                         const textToCopy = `{response_content}`;  
+   #                         copyButton.addEventListener('click', () => {{
+   #                             navigator.clipboard.writeText(textToCopy).then(() => {{
+   #                                 console.log('Text copied to clipboard!');
+   #                                 copyButton.innerText = "Copied!";
+   #                             }}).catch(err => {{
+   #                                 console.error('Could not copy text: ', err);
+   #                                 copyButton.innerText = "Copy Failed!";
+   #                             }});
+   #                         }});
+   #                     </script>
+   #                 """)
         
     st.subheader("Extracted Article:")
     st.write(st.session_state.extracted_article)
