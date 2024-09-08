@@ -54,7 +54,7 @@ def text_extractor_agent(model_input,website_content,URL_PATH):
         messages=[{"role": "user", "content": prompt}],
         model=model_input,
         temperature=0,
-        max_tokens=32000,
+        max_tokens=8100,
         top_p=1
     )
     return response.choices[0].message.content
@@ -84,7 +84,7 @@ def text_summarizer_agent(model_input,content_input,output_language):
         messages=[{"role": "user", "content": prompt}],
         model=model_input,
         temperature=0,
-        max_tokens=5000,
+        max_tokens=8100,
         top_p=1
     )
     return response.choices[0].message.content
