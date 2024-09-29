@@ -23,7 +23,7 @@ app_logger.info(f"version sys : {sys.version}")
 st.set_page_config(page_title="Article Summarizer & Translator", page_icon="📄")
 
 # Initialize Groq client (move to global scope)
-API_KEY = "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" #"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"
+API_KEY = "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"
 os.environ["GROQ_API_KEY"] = API_KEY
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
